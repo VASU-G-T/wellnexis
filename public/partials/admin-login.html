@@ -1,0 +1,62 @@
+<!-- ══════════════════════════════════════════════════════
+     🛡️ STANDALONE ADMIN LOGIN PAGE OVERLAY
+══════════════════════════════════════════════════════ -->
+<div class="admin-page-overlay hidden" id="adminPageOverlay">
+  <div class="admin-page-card">
+
+    <!-- Header -->
+    <div class="admin-page-header">
+      <div class="admin-logo-ring">🛡️</div>
+      <div class="admin-page-title">Admin Portal</div>
+      <div class="admin-page-sub">Wellnexis · Secure Admin Access</div>
+    </div>
+
+    <!-- Body -->
+    <div class="admin-page-body">
+
+      <!-- Alert box -->
+      <div id="adminPageErr" class="admin-page-err">
+        <span id="adminPageErrMsg">Invalid email or password.</span>
+      </div>
+
+      <!-- Email field -->
+      <div class="admin-field">
+        <label class="admin-field-label">Admin Email</label>
+        <div class="admin-field-wrap">
+          <span class="admin-field-icon">📧</span>
+          <input class="admin-page-input" id="adminPageEmail" type="email"
+            placeholder="admin@example.com"
+            onkeydown="if(event.key==='Enter')document.getElementById('adminPagePass').focus()"/>
+        </div>
+      </div>
+
+      <!-- Password field -->
+      <div class="admin-field">
+        <label class="admin-field-label">Password</label>
+        <div class="admin-field-wrap">
+          <span class="admin-field-icon">🔒</span>
+          <input class="admin-page-input" id="adminPagePass" type="password"
+            placeholder="Enter your password"
+            onkeydown="if(event.key==='Enter')submitAdminPageLogin()"/>
+          <button class="admin-pass-toggle" id="adminPageEye" onclick="toggleAdminPagePass()">👁️</button>
+        </div>
+      </div>
+
+      <!-- Login button -->
+      <button class="admin-page-btn" id="adminPageBtn" onclick="submitAdminPageLogin()">
+        🛡️ Sign In to Admin Panel
+      </button>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="admin-page-footer">
+      <button class="admin-back-link" onclick="closeAdminLoginPage()">← Back to Portal</button>
+      <div><span class="admin-secure-badge">🔐 256-bit secured · Admin only</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     🛍️ SHOP DIRECTORY SYSTEM — MAIN MODAL

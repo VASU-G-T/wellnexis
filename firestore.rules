@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users collection
+    match /users/{userId} {
+      allow read:  if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Shops collection — supports unlimited shop registrations
+    match /shops/{shopId} {
+      // Anyone can read approved shops; owners can read their own (pending/rejected)
+      allow read: if resource.data.isApproved == true
+                  || (request.auth != null && resource.data.ownerId == request.auth.uid);
+      // Any authenticated user can create a shop
+      allow create: if request.auth != null
+        && request.resource.data.ownerId == request.auth.uid;
+      // Owner can update own shop (except admin-controlled fields)
+      allow update: if request.auth != null
+        && resource.data.ownerId == request.auth.uid
+        && !request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny(['isApproved','status','rating','reviewCount']);
+      // Deletion via Admin SDK / Cloud Function only (prevent accidental loss)
+      allow delete: if false;
+    }
+
+    // Reviews collection
+    match /reviews/{reviewId} {
+      allow read:   if true;
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5;
+      // No editing or deleting reviews
+      allow update, delete: if false;
+    }
+  }
+}

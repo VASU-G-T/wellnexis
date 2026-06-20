@@ -1,0 +1,20 @@
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a class="logo" href="#" onclick="navigate('home');return false">
+    <img src="logo.png" alt="Wellnexis Logo" style="height:52px;width:auto;object-fit:contain;" />
+  </a>
+  <div class="nav-right">
+    <!-- 🛍️ Shop & Service Directory — public browse -->
+    <button class="nav-shop-btn" onclick="openShopDirectory()">
+      🏪 Shops <span class="ns-dot"></span>
+    </button>
+    <div style="display:flex;align-items:center;gap:6px">
+      <span style="font-size:.65rem;font-weight:700;color:var(--text3);white-space:nowrap">🌐 Lang</span>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+        <button class="lang-btn" onclick="setLang('ta',this)">த</button>
+        <button class="lang-btn" onclick="setLang('hi',this)">हि</button>
+      </div>
+    </div>
+  </div>
+</nav>

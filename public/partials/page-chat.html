@@ -1,0 +1,35 @@
+<!-- ── AI CHATBOT ── -->
+<div class="page" id="page-chat">
+  <div class="chat-wrap">
+    <div class="chat-header">
+      <div class="bot-avatar" style="background:linear-gradient(135deg,rgba(255,255,255,.25),rgba(255,255,255,.1));font-size:1.3rem">🤖</div>
+      <div class="bot-info" style="flex:1">
+        <h3 data-i18n="chat_title" style="font-size:.95rem;letter-spacing:-.2px">Wellnexis <span style="color:#F5A623;font-weight:900">Elite</span></h3>
+        <p><span class="online-dot"></span><span data-i18n="chat_sub">GOV · GENERAL · HYBRID Mode · EN / த / हि</span></p>
+      </div>
+      <div id="intentBadge" style="display:none;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,.15);color:#fff;font-size:.65rem;font-weight:700;white-space:nowrap">GOV MODE</div>
+    </div>
+    <!-- Memory Badge -->
+    <div id="memoryBadge" style="display:none;padding:7px 16px;background:linear-gradient(90deg,rgba(27,79,204,.08),rgba(11,138,138,.06));border-bottom:1px solid var(--border);font-size:.72rem;color:var(--primary);font-weight:600"></div>
+    <div class="quick-replies" id="quickReplies">
+      <div class="quick-reply" onclick="sendQuick('I am a farmer, what schemes are available for me?')">🌾 Farmer</div>
+      <div class="quick-reply" onclick="sendQuick('Best schemes for women entrepreneurs')">👩 Women</div>
+      <div class="quick-reply" onclick="sendQuick('Education scholarships for SC ST students')">📚 Scholarship</div>
+      <div class="quick-reply" onclick="sendQuick('Ayushman Bharat health card eligibility')">🏥 Health</div>
+      <div class="quick-reply" onclick="sendQuick('Housing scheme PMAY application process')">🏠 Housing</div>
+      <div class="quick-reply" onclick="sendQuick('Mudra loan for small business')">💼 Mudra Loan</div>
+      <div class="quick-reply" onclick="sendQuick('Suggest best schemes for me')">🎯 Best for Me</div>
+      <div class="quick-reply" onclick="sendQuick('Documents required for government schemes')">📄 Documents</div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg">
+        <div class="msg-avatar bot-msg-avatar">🤖</div>
+        <div class="msg-bubble bot-bubble">👋 <strong>Hello! I'm Wellnexis Elite</strong> — your smart AI assistant.<br/><br/>I work in 3 modes:<br/>🏛️ <strong>GOV MODE</strong> — Find schemes, check eligibility, guide applications<br/>💬 <strong>GENERAL MODE</strong> — Coding, Q&amp;A, explanations<br/>🔀 <strong>HYBRID MODE</strong> — Both together<br/><br/>I speak <strong>English · தமிழ் · हिंदी</strong> — type in any language!<br/><br/>💡 <em>Try: "I am a 30-year-old farmer from Tamil Nadu" and I'll find your best schemes!</em></div>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <textarea id="chatInput" placeholder="Type in English, தமிழ், or हिंदी…" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+</div>

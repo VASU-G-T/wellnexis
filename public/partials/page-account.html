@@ -1,0 +1,487 @@
+<!-- ══════════════════════════════════════════════════════
+     🏪 ACCOUNT TAB — Shop Owner Auth & Profile
+     Email/Password only. Not visible to regular users.
+══════════════════════════════════════════════════════ -->
+<div class="page" id="page-account">
+
+  <!-- ══════════════════════════════════
+       AUTH PANEL — shown when signed out
+  ══════════════════════════════════ -->
+  <div id="acct-auth-panel" class="acct-section">
+    <div class="acct-auth-card">
+
+      <!-- Header -->
+      <div class="acct-auth-header">
+        <span class="acct-auth-emblem">🏪</span>
+        <h2 class="acct-auth-title">Shop Owner Portal</h2>
+        <p class="acct-auth-sub">Sign in to manage your shop profile, update business details, and connect with customers on Wellnexis.</p>
+      </div>
+
+      <!-- ═══ OWNER GUIDELINE BANNER ═══ -->
+      <div class="owner-guide-banner" id="ownerGuideBanner">
+        <div class="guide-steps-title">📋 How to List Your Shop on Wellnexis</div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div class="guide-step-body">
+              <div class="guide-step-head">Create Your Account</div>
+              <div class="guide-step-desc">Click <strong>Register Shop</strong> tab → fill in your shop name, owner name, phone, email &amp; password.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div class="guide-step-body">
+              <div class="guide-step-head">Sign In to Your Portal</div>
+              <div class="guide-step-desc">Use your registered email &amp; password on the <strong>Sign In</strong> tab to access your owner dashboard.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div class="guide-step-body">
+              <div class="guide-step-head">Register Your Shop Details</div>
+              <div class="guide-step-desc">After signing in, click <strong>🛍️ Register My Shop</strong> to add your shop — category, location, contact &amp; description.</div>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div class="guide-step-body">
+              <div class="guide-step-head">Go Live &amp; Reach Customers</div>
+              <div class="guide-step-desc">Your shop will appear in the directory for customers across your district to find and contact you directly.</div>
+            </div>
+          </div>
+        </div>
+        <button class="guide-dismiss-btn" onclick="document.getElementById('ownerGuideBanner').style.display='none'">Got it, thanks! ✓</button>
+      </div>
+
+      <!-- Tab switcher: Sign In / Register -->
+      <div class="acct-tab-row">
+        <button class="acct-tab active" id="tab-signin" onclick="acctShowTab('signin')">Sign In</button>
+        <button class="acct-tab"        id="tab-signup" onclick="acctShowTab('signup')">Register Shop</button>
+      </div>
+
+      <!-- Error banner -->
+      <div class="acct-banner acct-banner-err acct-hidden" id="acct-err-banner">
+        <span class="acct-banner-icon">⚠️</span>
+        <span id="acct-err-msg">Something went wrong.</span>
+      </div>
+      <!-- Success banner -->
+      <div class="acct-banner acct-banner-ok acct-hidden" id="acct-ok-banner">
+        <span class="acct-banner-icon">✅</span>
+        <span id="acct-ok-msg">Done!</span>
+      </div>
+
+      <!-- ═══ SIGN IN FORM ═══ -->
+      <div id="acct-signin-form" class="acct-form">
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="si-email">Email Address</label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">📧</span>
+            <input class="acct-input" id="si-email" type="email"
+              placeholder="yourshop@email.com" autocomplete="email"
+              onkeydown="if(event.key==='Enter')document.getElementById('si-pass').focus()"/>
+          </div>
+        </div>
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="si-pass">Password</label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">🔒</span>
+            <input class="acct-input" id="si-pass" type="password"
+              placeholder="Enter your password" autocomplete="current-password"
+              onkeydown="if(event.key==='Enter')acctSignIn()"/>
+            <button class="acct-eye-btn" type="button"
+              onclick="acctTogglePass('si-pass',this)" title="Show/hide password">👁️</button>
+          </div>
+        </div>
+
+        <div class="acct-forgot-row">
+          <button class="acct-forgot-link" type="button" onclick="acctForgotPassword()">
+            Forgot password?
+          </button>
+        </div>
+
+        <button class="acct-primary-btn" id="si-btn" type="button" onclick="acctSignIn()">
+          <span class="acct-btn-icon">🔑</span> Sign In
+        </button>
+
+      </div><!-- /acct-signin-form -->
+
+      <!-- ═══ SIGN UP FORM ═══ -->
+      <div id="acct-signup-form" class="acct-form acct-hidden">
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="su-shopname">Shop Name <span style="color:var(--secondary)">*</span></label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">🏪</span>
+            <input class="acct-input" id="su-shopname" type="text"
+              placeholder="Your Shop / Business Name"
+              onkeydown="if(event.key==='Enter')document.getElementById('su-owner').focus()"/>
+          </div>
+        </div>
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="su-owner">Owner Name <span style="color:var(--secondary)">*</span></label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">👤</span>
+            <input class="acct-input" id="su-owner" type="text"
+              placeholder="Your full name"
+              onkeydown="if(event.key==='Enter')document.getElementById('su-phone').focus()"/>
+          </div>
+        </div>
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="su-phone">Phone Number</label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">📱</span>
+            <input class="acct-input" id="su-phone" type="tel"
+              placeholder="10-digit mobile number" maxlength="10"
+              onkeydown="if(event.key==='Enter')document.getElementById('su-email').focus()"/>
+          </div>
+        </div>
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="su-email">Email Address <span style="color:var(--secondary)">*</span></label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">📧</span>
+            <input class="acct-input" id="su-email" type="email"
+              placeholder="yourshop@email.com" autocomplete="email"
+              onkeydown="if(event.key==='Enter')document.getElementById('su-pass').focus()"/>
+          </div>
+        </div>
+
+        <div class="acct-field-wrap">
+          <label class="acct-label" for="su-pass">Password <span style="color:var(--secondary)">*</span></label>
+          <div class="acct-input-group">
+            <span class="acct-input-icon">🔒</span>
+            <input class="acct-input" id="su-pass" type="password"
+              placeholder="Minimum 6 characters" autocomplete="new-password"
+              onkeydown="if(event.key==='Enter')acctSignUp()"/>
+            <button class="acct-eye-btn" type="button"
+              onclick="acctTogglePass('su-pass',this)">👁️</button>
+          </div>
+          <div class="acct-pass-strength">
+            <div class="acct-strength-fill" id="su-strength-fill"></div>
+          </div>
+          <div class="acct-strength-label" id="su-strength-label"></div>
+        </div>
+
+        <button class="acct-primary-btn" id="su-btn" type="button" onclick="acctSignUp()">
+          <span class="acct-btn-icon">✨</span> Create Account
+        </button>
+
+        <p class="acct-terms-note">
+          By registering you confirm you are the authorised owner of this shop and agree to our terms of service.
+        </p>
+
+      </div><!-- /acct-signup-form -->
+
+    </div><!-- /acct-auth-card -->
+  </div><!-- /acct-auth-panel -->
+
+
+  <!-- ══════════════════════════════════
+       PROFILE PANEL — shown when signed in
+  ══════════════════════════════════ -->
+  <div id="acct-profile-panel" class="acct-section acct-hidden">
+
+    <!-- Hero banner -->
+    <div class="acct-profile-hero">
+      <div class="acct-avatar-ring">
+        <div class="acct-avatar" id="acct-avatar-display">S</div>
+      </div>
+      <div class="acct-profile-hero-info">
+        <div class="acct-profile-name"  id="acct-profile-name">Shop Name</div>
+        <div class="acct-profile-email" id="acct-profile-email">owner@email.com</div>
+        <div class="acct-profile-badge">
+          <span class="acct-badge-dot"></span> Active Shop Owner
+        </div>
+      </div>
+      <button class="acct-signout-btn" type="button" onclick="acctSignOut()">Sign Out</button>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="acct-stats-row">
+      <div class="acct-stat-card">
+        <div class="acct-stat-num"   id="acct-stat-joined">—</div>
+        <div class="acct-stat-label">Joined</div>
+      </div>
+      <div class="acct-stat-card">
+        <div class="acct-stat-num"   id="acct-stat-status">—</div>
+        <div class="acct-stat-label">Status</div>
+      </div>
+      <div class="acct-stat-card">
+        <div class="acct-stat-num"   id="acct-stat-district">—</div>
+        <div class="acct-stat-label">District</div>
+      </div>
+    </div>
+
+    <!-- Register My Shop CTA — shown only when logged in -->
+    <div class="acct-register-shop-cta">
+      <div class="acct-cta-left">
+        <span class="acct-cta-icon">🛍️</span>
+        <div>
+          <div class="acct-cta-title">Register Your Shop</div>
+          <div class="acct-cta-sub">Add your shop to the Wellnexis directory and reach more customers.</div>
+        </div>
+      </div>
+      <button class="acct-cta-btn" type="button" onclick="openShopModal()">➕ Add Shop</button>
+    </div>
+
+    <!-- Profile detail card -->
+    <div class="acct-profile-card">
+
+      <!-- Card header -->
+      <div class="acct-profile-card-header">
+        <div class="acct-profile-card-title">📋 Shop Details</div>
+        <button class="acct-edit-toggle-btn" id="acct-edit-btn"
+          type="button" onclick="acctToggleEdit()">✏️ Edit</button>
+      </div>
+
+      <!-- Profile-scoped banners -->
+      <div style="padding: 0 18px;">
+        <div class="acct-banner acct-banner-err acct-hidden" id="acct-profile-err">
+          <span class="acct-banner-icon">⚠️</span>
+          <span id="acct-profile-err-msg">Error saving.</span>
+        </div>
+        <div class="acct-banner acct-banner-ok acct-hidden" id="acct-profile-ok">
+          <span class="acct-banner-icon">✅</span>
+          <span>Profile updated successfully!</span>
+        </div>
+      </div>
+
+      <!-- ── VIEW MODE ── -->
+      <div id="acct-view-mode">
+        <div class="acct-detail-grid">
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">🏪</div>
+            <div>
+              <div class="acct-detail-label">Shop Name</div>
+              <div class="acct-detail-val" id="view-shopname">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">👤</div>
+            <div>
+              <div class="acct-detail-label">Owner Name</div>
+              <div class="acct-detail-val" id="view-owner">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">📱</div>
+            <div>
+              <div class="acct-detail-label">Phone</div>
+              <div class="acct-detail-val" id="view-phone">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">📧</div>
+            <div>
+              <div class="acct-detail-label">Email</div>
+              <div class="acct-detail-val" id="view-email">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">🗂️</div>
+            <div>
+              <div class="acct-detail-label">Shop Type</div>
+              <div class="acct-detail-val" id="view-type">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">📍</div>
+            <div>
+              <div class="acct-detail-label">Location</div>
+              <div class="acct-detail-val" id="view-location">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">🏠</div>
+            <div>
+              <div class="acct-detail-label">Address</div>
+              <div class="acct-detail-val" id="view-address">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">🕐</div>
+            <div>
+              <div class="acct-detail-label">Opening Hours</div>
+              <div class="acct-detail-val" id="view-hours">—</div>
+            </div>
+          </div>
+
+          <div class="acct-detail-row">
+            <div class="acct-detail-icon">📝</div>
+            <div>
+              <div class="acct-detail-label">Description</div>
+              <div class="acct-detail-val" id="view-desc">—</div>
+            </div>
+          </div>
+
+        </div><!-- /acct-detail-grid -->
+
+        <!-- View public profile -->
+        <a class="acct-visit-link" href="#"
+          onclick="acctVisitPublicProfile(event)">
+          🌐 View My Public Shop Profile →
+        </a>
+
+      </div><!-- /acct-view-mode -->
+
+      <!-- ── EDIT MODE ── -->
+      <div id="acct-edit-mode" class="acct-hidden">
+        <div class="acct-edit-grid">
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">Shop Name</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">🏪</span>
+              <input class="acct-input" id="ed-shopname" type="text" placeholder="Shop / Business Name"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">Owner Name</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">👤</span>
+              <input class="acct-input" id="ed-owner" type="text" placeholder="Your full name"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">Phone Number</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">📱</span>
+              <input class="acct-input" id="ed-phone" type="tel"
+                placeholder="10-digit mobile" maxlength="10"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">Shop Type</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">🗂️</span>
+              <select class="acct-input acct-select" id="ed-type">
+                <option value="">— Select Type —</option>
+                <option>Grocery / Kirana</option>
+                <option>Medical / Pharmacy</option>
+                <option>Clothing / Textile</option>
+                <option>Electronics</option>
+                <option>CSC / Jan Seva Kendra</option>
+                <option>Government Office</option>
+                <option>Agriculture / Seeds</option>
+                <option>Hardware / Tools</option>
+                <option>Stationery</option>
+                <option>Food / Restaurant</option>
+                <option>Bank / Financial</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">District</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">📍</span>
+              <input class="acct-input" id="ed-district" type="text" placeholder="e.g. Karur"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap">
+            <label class="acct-label">Village / Area</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">🏘️</span>
+              <input class="acct-input" id="ed-village" type="text" placeholder="Village or area name"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap acct-full-width">
+            <label class="acct-label">Full Address</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">🏠</span>
+              <input class="acct-input" id="ed-address" type="text"
+                placeholder="Street, landmark, pincode"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap acct-full-width">
+            <label class="acct-label">Opening Hours</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">🕐</span>
+              <input class="acct-input" id="ed-hours" type="text"
+                placeholder="e.g. Mon–Sat 9 AM – 8 PM"/>
+            </div>
+          </div>
+
+          <div class="acct-field-wrap acct-full-width">
+            <label class="acct-label">Short Description</label>
+            <div class="acct-input-group">
+              <span class="acct-input-icon">📝</span>
+              <textarea class="acct-input acct-textarea" id="ed-desc" rows="3"
+                placeholder="Tell customers about your shop, services, specialties…"></textarea>
+            </div>
+          </div>
+
+        </div><!-- /acct-edit-grid -->
+
+        <!-- Change password (collapsed by default) -->
+        <div class="acct-change-pass-section">
+          <button class="acct-collapse-btn" type="button" onclick="acctTogglePassSection()">
+            🔐 Change Password
+            <span id="acct-pass-arrow">▼</span>
+          </button>
+          <div class="acct-pass-section acct-hidden" id="acct-pass-section">
+
+            <div class="acct-field-wrap">
+              <label class="acct-label">New Password</label>
+              <div class="acct-input-group">
+                <span class="acct-input-icon">🔒</span>
+                <input class="acct-input" id="ed-newpass" type="password"
+                  placeholder="New password (min 6 chars)" autocomplete="new-password"/>
+                <button class="acct-eye-btn" type="button"
+                  onclick="acctTogglePass('ed-newpass',this)">👁️</button>
+              </div>
+            </div>
+
+            <div class="acct-field-wrap">
+              <label class="acct-label">Confirm New Password</label>
+              <div class="acct-input-group">
+                <span class="acct-input-icon">🔒</span>
+                <input class="acct-input" id="ed-confirmpass" type="password"
+                  placeholder="Repeat new password"/>
+              </div>
+            </div>
+
+          </div><!-- /acct-pass-section -->
+        </div><!-- /acct-change-pass-section -->
+
+        <!-- Save / Cancel -->
+        <div class="acct-edit-actions">
+          <button class="acct-cancel-btn" type="button" onclick="acctCancelEdit()">Cancel</button>
+          <button class="acct-save-btn"   type="button" id="acct-save-btn" onclick="acctSaveProfile()">
+            💾 Save Changes
+          </button>
+        </div>
+
+      </div><!-- /acct-edit-mode -->
+
+    </div><!-- /acct-profile-card -->
+
+    <!-- Sign out danger zone -->
+    <div class="acct-danger-section">
+      <button class="acct-danger-btn" type="button" onclick="acctConfirmSignOut()">
+        🚪 Sign Out of Account
+      </button>
+    </div>
+
+  </div><!-- /acct-profile-panel -->
+
+</div><!-- /page-account -->
