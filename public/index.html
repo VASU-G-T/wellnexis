@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#1B4FCC"/>
+  <title>Wellnexis</title>
+
+  <!-- ═══════════════════════════════════════
+       External CDN Libraries
+  ═══════════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- App Config (EmailJS keys + init) -->
+  <script src="js/config.js"></script>
+
+  <!-- ═══════════════════════════════════════
+       Stylesheets — load order matters
+  ═══════════════════════════════════════ -->
+  <!-- Leaflet.js for interactive shop location map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/sp38=" crossorigin=""></script>
+
+  <link rel="stylesheet" href="css/variables.css"/>       <!-- CSS custom properties + reset -->
+  <link rel="stylesheet" href="css/base.css"/>            <!-- Base styles: nav, hero, scheme cards, chatbot, modal -->
+  <link rel="stylesheet" href="css/shops-browse.css"/>    <!-- Shops browse page: grid, cards, search bar -->
+  <link rel="stylesheet" href="css/shop-form.css"/>       <!-- Shop registration form: FAB, modal, steps, OTP -->
+  <link rel="stylesheet" href="css/shop-directory.css"/>  <!-- Shop directory: full-screen modal, auth, detail, admin -->
+  <link rel="stylesheet" href="css/onboarding.css"/>      <!-- Onboarding overlay -->
+  <link rel="stylesheet" href="css/account.css"/>         <!-- Account tab: shop owner auth & profile -->
+  <!-- Google Maps JS API — replace YOUR_API_KEY -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvVRn66W9Piusu-Hp9IHZtGizyd0bVcHI&callback=initNearbyMapApi&loading=async" async defer></script>
+</head>
+<body>
+
+<!--
+  ═══════════════════════════════════════════════════════════════
+  HOW PARTIALS WORK
+  ───────────────────────────────────────────────────────────────
+  Each <div id="partial-*"> is a placeholder.
+  js/loader.js runs FIRST (blocking/synchronous), fetches each
+  partials/*.html file, and injects its HTML into the placeholder
+  before DOMContentLoaded fires — so every JS module finds its
+  elements already in the DOM.
+
+  partial files:
+    partials/onboarding.html          → Onboarding overlay
+    partials/top-nav.html             → Top navigation bar
+    partials/shop-register-modal.html → Shop registration modal + FAB
+    partials/page-home.html           → Home page
+    partials/page-schemes.html        → Schemes + Scheme detail pages
+    partials/page-docs.html           → Documents page
+    partials/page-eligibility.html    → Eligibility checker page
+    partials/page-chat.html           → AI Chatbot page
+    partials/page-shops.html          → Shops browse page
+    partials/bottom-nav.html          → Bottom navigation bar
+    partials/modal-toast.html         → Global modal + toast notification
+    partials/admin-login.html         → Admin login overlay
+    partials/shop-directory.html      → Shop directory full-screen modal
+  ═══════════════════════════════════════════════════════════════
+-->
+
+<!-- Onboarding overlay -->
+<div id="partial-onboarding"></div>
+
+<!-- Top navigation bar -->
+<div id="partial-top-nav"></div>
+
+<!-- Shop registration FAB + modal -->
+<div id="partial-shop-register-modal"></div>
+
+<!-- Main pages -->
+<main class="main">
+  <div id="partial-page-home"></div>
+  <div id="partial-page-schemes"></div>
+  <div id="partial-page-docs"></div>
+  <div id="partial-page-eligibility"></div>
+  <div id="partial-page-chat"></div>
+  <div id="partial-page-account"></div>
+</main>
+
+<!-- Bottom navigation bar -->
+<div id="partial-bottom-nav"></div>
+
+<!-- Global modal + toast -->
+<div id="partial-modal-toast"></div>
+
+<!-- Admin login overlay -->
+<div id="partial-admin-login"></div>
+
+<!-- Shop directory full-screen modal -->
+<div id="partial-shop-directory"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LOADER — Must be FIRST script in body (runs synchronously,
+     injects all partials before DOMContentLoaded fires)
+═══════════════════════════════════════════════════════════════ -->
+<script src="js/loader.js"></script>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JavaScript Modules — loaded AFTER loader.js injects partials
+     Load order matters — see comments on each layer
+═══════════════════════════════════════════════════════════════ -->
+
+<!-- LAYER 1 · Translations (must load first — all modules call t()) -->
+<script src="js/translations.js"></script>
+
+<!-- LAYER 2 · Static Data -->
+<script src="js/data-schemes.js"></script>
+<script src="js/data-docs.js"></script>
+
+<!-- LAYER 3 · Core UI helpers -->
+<script src="js/navigation.js"></script>
+<script src="js/ui-utils.js"></script>
+
+<!-- LAYER 4 · Feature Modules -->
+<script src="js/schemes.js"></script>
+<script src="js/documents.js"></script>
+<script src="js/eligibility.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/voice.js"></script>
+
+<!-- LAYER 5 · Shop Registration (no Firebase dependency) -->
+<script src="js/shop-registration.js"></script>
+
+<!-- LAYER 6 · Backend / Firebase -->
+<script src="js/firebase-config.js"></script>
+<script src="js/shop-directory.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/utils.js"></script>
+
+<!-- LAYER 7 · Onboarding -->
+<script src="js/onboarding.js"></script>
+
+<!-- LAYER 8 · Account (shop owner auth & profile) -->
+<script src="js/account.js"></script>
+
+</body>
+</html>

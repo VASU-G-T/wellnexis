@@ -1,0 +1,234 @@
+<!-- ══════════════════════════════════════════
+     ONBOARDING OVERLAY — shown before app
+══════════════════════════════════════════ -->
+<div id="ob-overlay">
+  <div class="ob-card">
+
+    <!-- ── STEP 0: Language Selection ── -->
+    <div id="obLangStep" style="display:block">
+      <!-- Lang Header -->
+      <div class="ob-header" style="padding:22px 28px 18px">
+        <div class="ob-gov-badge">🏛️ GOVERNMENT OF INDIA &nbsp;·&nbsp; WELFARE PORTAL</div>
+        <h2>Welcome to <em style="color:#F5A623">Wellnexis</em></h2>
+        <p style="margin-top:4px;opacity:.85">Select your preferred language to continue</p>
+      </div>
+      <div class="ob-lang-screen">
+        <div class="ob-lang-title">
+          <h3>🌐 Choose Language / மொழி தேர்வு / भाषा चुनें</h3>
+          <p>You can change this anytime from the top menu</p>
+        </div>
+        <div class="ob-lang-grid">
+          <button class="ob-lang-btn ob-lang-sel" id="obLangEN" onclick="obSelectLang('en',this)">
+            <span class="ob-lang-check">✓</span>
+            <span class="ob-lang-flag">🇬🇧</span>
+            <span class="ob-lang-name">English</span>
+            <span class="ob-lang-native">English</span>
+          </button>
+          <button class="ob-lang-btn" id="obLangTA" onclick="obSelectLang('ta',this)">
+            <span class="ob-lang-check">✓</span>
+            <span class="ob-lang-flag">🇮🇳</span>
+            <span class="ob-lang-name">Tamil</span>
+            <span class="ob-lang-native">தமிழ்</span>
+          </button>
+          <button class="ob-lang-btn" id="obLangHI" onclick="obSelectLang('hi',this)">
+            <span class="ob-lang-check">✓</span>
+            <span class="ob-lang-flag">🇮🇳</span>
+            <span class="ob-lang-name">Hindi</span>
+            <span class="ob-lang-native">हिंदी</span>
+          </button>
+        </div>
+        <div class="ob-lang-divider"><span>Tap to select · தேர்ந்தெடுக்க தொட்டுப்பார் · चुनने के लिए टैप करें</span></div>
+      </div>
+      <div class="ob-footer" style="justify-content:flex-end">
+        <div style="font-size:.72rem;color:#8891AA;flex:1">Language selection helps us show content in your preferred language.</div>
+        <button class="ob-btn-next" onclick="obProceedFromLang()" style="white-space:nowrap">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── MAIN ONBOARDING (Steps 1–4) ── -->
+    <div id="obMainSteps" style="display:none">
+
+    <!-- Main Steps Header (translated) -->
+    <div class="ob-header">
+      <div class="ob-gov-badge">🏛️ GOVERNMENT OF INDIA &nbsp;·&nbsp; WELFARE PORTAL</div>
+      <h2>Welcome to <em style="color:#F5A623">Wellnexis</em></h2>
+      <p>Please provide a few details so we can show the most relevant schemes for you.</p>
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="ob-progress">
+      <div class="ob-step-dot active" id="obDot1">1</div>
+      <div class="ob-step-line" id="obLine1"></div>
+      <div class="ob-step-dot" id="obDot2">2</div>
+      <div class="ob-step-line" id="obLine2"></div>
+      <div class="ob-step-dot" id="obDot3">3</div>
+      <div class="ob-step-line" id="obLine3"></div>
+      <div class="ob-step-dot" id="obDot4">4</div>
+    </div>
+
+    <!-- ── STEP 1: Basic Info ── -->
+    <div class="ob-body">
+      <div class="ob-step ob-active" id="obStep1">
+        <div class="ob-step-title">👤 Basic Information <span>Step 1 of 4</span></div>
+
+        <div class="ob-row">
+          <div class="ob-field">
+            <label class="ob-label">Age<span class="ob-req">*</span></label>
+            <input class="ob-input" id="obAge" type="number" min="1" max="120" placeholder="e.g. 32"/>
+            <div class="ob-err" id="obErrAge">Please enter a valid age (1–120)</div>
+          </div>
+          <div class="ob-field">
+            <label class="ob-label">Gender <span class="ob-req">*</span></label>
+            <div class="ob-radio-group" id="obGenderGroup">
+              <button class="ob-radio-btn" onclick="obRadio('obGenderGroup',this,'♂ Male')">♂ Male</button>
+              <button class="ob-radio-btn" onclick="obRadio('obGenderGroup',this,'♀ Female')">♀ Female</button>
+              <button class="ob-radio-btn" onclick="obRadio('obGenderGroup',this,'⚧ Other')">⚧ Other</button>
+            </div>
+            <div class="ob-err" id="obErrGender">Please select gender</div>
+          </div>
+        </div>
+
+        <div class="ob-row">
+          <div class="ob-field">
+            <label class="ob-label">State <span class="ob-req">*</span></label>
+            <select class="ob-select" id="obState" onchange="obPopulateDistricts()">
+              <option value="">— Select State —</option>
+              <option>Andhra Pradesh</option><option>Arunachal Pradesh</option>
+              <option>Assam</option><option>Bihar</option><option>Chhattisgarh</option>
+              <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+              <option>Himachal Pradesh</option><option>Jharkhand</option>
+              <option>Karnataka</option><option>Kerala</option>
+              <option>Madhya Pradesh</option><option>Maharashtra</option>
+              <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+              <option>Nagaland</option><option>Odisha</option><option>Punjab</option>
+              <option>Rajasthan</option><option>Sikkim</option><option>Tamil Nadu</option>
+              <option>Telangana</option><option>Tripura</option>
+              <option>Uttar Pradesh</option><option>Uttarakhand</option>
+              <option>West Bengal</option>
+              <option>Andaman &amp; Nicobar Islands</option>
+              <option>Chandigarh</option><option>Dadra &amp; Nagar Haveli</option>
+              <option>Daman &amp; Diu</option><option>Delhi</option>
+              <option>Jammu &amp; Kashmir</option><option>Ladakh</option>
+              <option>Lakshadweep</option><option>Puducherry</option>
+            </select>
+            <div class="ob-err" id="obErrState">Please select a state</div>
+          </div>
+          <div class="ob-field">
+            <label class="ob-label">District <span class="ob-req">*</span></label>
+            <select class="ob-select" id="obDistrict">
+              <option value="">— Select District —</option>
+            </select>
+            <div class="ob-err" id="obErrDistrict">Please select a district</div>
+          </div>
+        </div>
+
+        <div class="ob-field">
+          <label class="ob-label">Area Type <span class="ob-req">*</span></label>
+          <div class="ob-radio-group" id="obAreaGroup">
+            <button class="ob-radio-btn" onclick="obRadio('obAreaGroup',this,'🏙️ Urban')">🏙️ Urban</button>
+            <button class="ob-radio-btn" onclick="obRadio('obAreaGroup',this,'🌾 Rural')">🌾 Rural</button>
+            <button class="ob-radio-btn" onclick="obRadio('obAreaGroup',this,'🏘️ Semi-Urban')">🏘️ Semi-Urban</button>
+          </div>
+          <div class="ob-err" id="obErrArea">Please select area type</div>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Physical Disability ── -->
+      <div class="ob-step" id="obStep2">
+        <div class="ob-step-title">♿ Physical Status <span>Step 2 of 4</span></div>
+        <div class="ob-info-box">
+          ℹ️ This helps us identify disability benefit schemes, special reservations, and accessibility services available for you.
+        </div>
+        <div class="ob-field">
+          <label class="ob-label" style="font-size:.82rem;margin-bottom:12px;">Are you a <strong>Physically Challenged</strong> person?</label>
+          <div class="ob-radio-group" id="obPCGroup">
+            <button class="ob-radio-btn" style="flex:1;padding:16px;" onclick="obRadioPC(this,'yes')">
+              ♿ <span>Yes</span>
+            </button>
+            <button class="ob-radio-btn" style="flex:1;padding:16px;" onclick="obRadioPC(this,'no')">
+              🙆 <span>No</span>
+            </button>
+          </div>
+          <div class="ob-err" id="obErrPC">Please select an option</div>
+        </div>
+        <div id="obDisabilityTypeWrap" style="display:none;margin-top:14px;">
+          <label class="ob-label">Type of Disability <span class="ob-req">*</span></label>
+          <div class="ob-chips" id="obDisabilityChips">
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 👁️ Visual</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 👂 Hearing</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 🦽 Locomotor</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 🧠 Intellectual</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 🗣️ Speech</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 🩺 Mental Illness</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 🔀 Multiple</div>
+            <div class="ob-chip" onclick="obChipSingle('obDisabilityChips',this)"><span class="ob-chip-tick">✓</span> 📋 Other</div>
+          </div>
+          <div class="ob-err" id="obErrDisabilityType">Please select disability type</div>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Caste Category ── -->
+      <div class="ob-step" id="obStep3">
+        <div class="ob-step-title">🏷️ Caste Category <span>Step 3 of 4</span></div>
+        <div class="ob-info-box">
+          ℹ️ Your caste category determines eligibility for reservations, scholarships, and welfare schemes under Government of India policies.
+        </div>
+        <div class="ob-field">
+          <label class="ob-label">Select Your Category <span class="ob-req">*</span></label>
+          <div class="ob-chips" id="obCasteChips">
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🟡 General (UR)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🟠 OBC</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🔵 SC (Scheduled Caste)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🟢 ST (Scheduled Tribe)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🔴 EWS (Economically Weaker Section)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🟣 DNT / NT (Nomadic Tribe)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> ⚪ MBC (Most Backward Class)</div>
+            <div class="ob-chip" onclick="obChipSingle('obCasteChips',this)"><span class="ob-chip-tick">✓</span> 🔘 BC (Backward Class)</div>
+          </div>
+          <div class="ob-err" id="obErrCaste">Please select your caste category</div>
+        </div>
+      </div>
+
+      <!-- ── STEP 4: Scheme Category ── -->
+      <div class="ob-step" id="obStep4">
+        <div class="ob-step-title">📋 Scheme Categories <span>Step 4 of 4</span></div>
+        <div class="ob-info-box">
+          ℹ️ Select all scheme categories you are interested in. You can choose multiple options.
+        </div>
+        <div class="ob-field">
+          <label class="ob-label">Select Categories of Interest <span class="ob-req">*</span> <small style="font-weight:400;color:#8891AA">(Multiple allowed)</small></label>
+          <div class="ob-chips" id="obSchemeChips">
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🎓 Education &amp; Scholarship</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🏥 Health &amp; Medical</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🏠 Housing &amp; Shelter</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 💼 Employment &amp; Skill</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🌾 Agriculture &amp; Farming</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 💰 Financial Assistance</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 👩 Women &amp; Child Welfare</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 👴 Senior Citizen Benefits</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> ♿ Disability Benefits</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🏭 MSME &amp; Business</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🍽️ Food &amp; Nutrition</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> ⚡ Electricity &amp; Water</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 🛡️ Insurance &amp; Pension</div>
+            <div class="ob-chip" onclick="obChipMulti(this)"><span class="ob-chip-tick">✓</span> 📦 Other Welfare</div>
+          </div>
+          <div class="ob-err" id="obErrScheme">Please select at least one scheme category</div>
+        </div>
+      </div>
+    </div><!-- /ob-body -->
+
+    <!-- Footer Buttons -->
+    <div class="ob-footer">
+      <button class="ob-btn-back" id="obBtnBack" onclick="obBack()" style="visibility:hidden">← Back</button>
+      <div style="font-size:.7rem;color:#8891AA;text-align:center;">
+        Step <span id="obCurStep">1</span> of 4
+      </div>
+      <button class="ob-btn-next" id="obBtnNext" onclick="obNext()">Next →</button>
+      <button class="ob-btn-enter" id="obBtnEnter" onclick="obEnterPortal()" style="display:none">🚀 Enter Portal</button>
+    </div>
+
+    </div><!-- /obMainSteps -->
+
+  </div><!-- /ob-card -->
+</div><!-- /ob-overlay -->

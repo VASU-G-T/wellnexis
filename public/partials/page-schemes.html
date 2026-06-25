@@ -1,0 +1,43 @@
+<!-- ── SCHEMES PAGE ── -->
+<div class="page" id="page-schemes">
+  <div class="section-header">
+    <p class="section-title"><span class="st-icon">📋</span> <span data-i18n="schemes_all">All Government Schemes</span></p>
+    <span class="badge badge-blue" id="schemeCount"></span>
+  </div>
+
+  <!-- View Toggle -->
+  <div style="display:flex;gap:10px;margin-bottom:12px;align-items:center">
+    <button id="viewGrid" class="view-toggle-btn active" onclick="setSchemeView('grid',this)" title="Grid View">⊞ Grid</button>
+    <button id="viewList" class="view-toggle-btn" onclick="setSchemeView('list',this)" title="List View">☰ List</button>
+    <input type="text" class="search-input" placeholder="🔍 Search schemes..." oninput="filterSchemesSearch(this.value)" style="flex:1;padding:7px 12px;border-radius:20px;border:1.5px solid var(--border);font-size:.8rem;background:var(--surface);color:var(--text)">
+  </div>
+
+  <!-- Category Chips -->
+  <div class="chip-row" id="schemeCatChips">
+    <div class="chip active" onclick="filterCat2('All',this)"><span data-i18n="chip_all2">All</span></div>
+    <div class="chip" onclick="filterCat2('Agriculture',this)">🌾 Agriculture</div>
+    <div class="chip" onclick="filterCat2('Education',this)">📚 Education</div>
+    <div class="chip" onclick="filterCat2('Health',this)">🏥 Health</div>
+    <div class="chip" onclick="filterCat2('Housing',this)">🏠 Housing</div>
+    <div class="chip" onclick="filterCat2('Women',this)">👩 Women</div>
+    <div class="chip" onclick="filterCat2('Business',this)">💼 Business</div>
+    <div class="chip" onclick="filterCat2('Labour',this)">🔧 Labour</div>
+    <div class="chip" onclick="filterCat2('Pension',this)">🧓 Pension</div>
+    <div class="chip" onclick="filterCat2('Social',this)">🤝 Social</div>
+    <div class="chip" onclick="filterCat2('Financial',this)">💰 Financial</div>
+    <div class="chip" onclick="filterCat2('Infrastructure',this)">⚡ Infrastructure</div>
+    <div class="chip" onclick="filterCat2('Science',this)">🔬 Science</div>
+  </div>
+
+  <!-- Grid View -->
+  <div class="schemes-grid" id="allSchemesGrid"></div>
+
+  <!-- List View -->
+  <div id="allSchemesList" class="scheme-list-container" style="display:none"></div>
+</div>
+
+<!-- ── SCHEME DETAIL PAGE ── -->
+<div class="page" id="page-detail">
+  <button class="back-btn" onclick="navigate('schemes')"><span data-i18n="btn_back">← Back to Schemes</span></button>
+  <div id="detailContent"></div>
+</div>

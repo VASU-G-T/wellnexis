@@ -1,0 +1,15 @@
+:root{
+  --primary:#1B4FCC;--primary-light:#3B6EE8;--primary-dark:#0F3399;
+  --secondary:#D4402A;--accent:#F5A623;--green:#1D9B5E;--teal:#0B8A8A;
+  --bg:#F4F6FB;--surface:#FFFFFF;--surface2:#EEF2FB;
+  --border:#D6DCF0;--border2:#C0CAE8;
+  --text:#1A1D2E;--text2:#4A5068;--text3:#8891AA;
+  --shadow:0 2px 12px rgba(27,79,204,0.10);--shadow-lg:0 8px 40px rgba(27,79,204,0.18);
+  --radius:16px;--radius-sm:10px;--radius-xs:7px;
+  --font:'Outfit',sans-serif;
+  --nav-h:60px;--bot-h:68px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);min-height:100vh;overflow-x:hidden;color:var(--text)}
+

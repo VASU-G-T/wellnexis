@@ -1,0 +1,15 @@
+<!-- MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalBox">
+    <div class="modal-header">
+      <h2 id="modalTitle" data-i18n="modal_title">Details</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" style="display:none" class="toast"></div>
+
+</div>

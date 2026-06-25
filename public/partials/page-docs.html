@@ -1,0 +1,19 @@
+<!-- ── DOCUMENTS PAGE ── -->
+<div class="page" id="page-docs">
+  <div class="section-header">
+    <p class="section-title"><span class="st-icon">📄</span> <span data-i18n="docs_title">Stationery &amp; Government Documents</span></p>
+    <span class="badge badge-blue" id="docCount"></span>
+  </div>
+  <div class="info-box"><span data-i18n="docs_infobox">ℹ️ Download official government application forms, declarations, and certificates. All forms are based on official government templates. Fill &amp; print for submission.</span>
+  </div>
+  <div class="chip-row" id="docChipRow">
+    <div class="chip active" onclick="filterDocs('All',this)"><span data-i18n="dchip_all">All Documents</span></div>
+    <div class="chip" onclick="filterDocs('Application Form',this)"><span data-i18n="dchip_app">📝 Application Forms</span></div>
+    <div class="chip" onclick="filterDocs('Certificate',this)"><span data-i18n="dchip_cert">📜 Certificates</span></div>
+    <div class="chip" onclick="filterDocs('Declaration',this)"><span data-i18n="dchip_decl">✍️ Declarations</span></div>
+    <div class="chip" onclick="filterDocs('Identity',this)"><span data-i18n="dchip_id">🪪 Identity Proofs</span></div>
+    <div class="chip" onclick="filterDocs('Income',this)"><span data-i18n="dchip_income">💰 Income Proofs</span></div>
+    <div class="chip" onclick="filterDocs('Property',this)"><span data-i18n="dchip_prop">🏠 Property Docs</span></div>
+  </div>
+  <div class="docs-page-grid" id="docsGrid"></div>
+</div>

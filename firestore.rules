@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper: is the requester the admin? ──
+    function isAdmin() {
+      return request.auth != null &&
+             request.auth.token.email == 'vasugt360@gmail.com';
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read:  if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Shops collection — supports unlimited shop registrations
+    match /shops/{shopId} {
+      // Anyone can read approved shops; owners can read their own (pending/rejected); admin reads all
+      allow read: if resource.data.isApproved == true
+                  || isAdmin()
+                  || (request.auth != null && resource.data.ownerId == request.auth.uid);
+
+      // Any authenticated user can create a shop
+      allow create: if request.auth != null
+        && request.resource.data.ownerId == request.auth.uid;
+
+      // Owner can update own shop (except admin-controlled fields);
+      // Admin can update anything (approval, status, rating, etc.)
+      allow update: if isAdmin()
+        || (request.auth != null
+            && resource.data.ownerId == request.auth.uid
+            && !request.resource.data.diff(resource.data).affectedKeys()
+                  .hasAny(['isApproved','status','rating','reviewCount']));
+
+      // Admin can delete; owner cannot
+      allow delete: if isAdmin();
+    }
+
+    // Reviews collection
+    match /reviews/{reviewId} {
+      allow read:   if true;
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.rating is int
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5;
+      // No editing or deleting reviews (admin only can delete)
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+
+    // Admin-only config / stats collection (optional future use)
+    match /admin/{docId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

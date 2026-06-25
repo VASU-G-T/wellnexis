@@ -1,0 +1,320 @@
+<!-- ─────────────────────────────────────────
+     SHOP REGISTRATION — MODAL
+───────────────────────────────────────── -->
+<div class="shop-overlay hidden" id="shopOverlay" onclick="if(event.target===this)closeShopModal()">
+<div class="shop-modal" id="shopModal">
+
+  <!-- Header -->
+  <div class="shop-modal-header">
+    <div>
+      <h2>🛍️ Register Your Shop</h2>
+      <p>Join the Wellnexis marketplace — reach more customers</p>
+    </div>
+    <button class="shop-modal-close" onclick="closeShopModal()">✕</button>
+  </div>
+
+  <!-- ── HOME LANDING PANEL ── -->
+  <div class="shop-home-panel active" id="shopHomePanel">
+    <div class="shop-home-hero">
+      <span class="shop-home-hero-icon">🛍️</span>
+      <h3>Register Your Shop</h3>
+      <p>Join the Wellnexis marketplace — list your shop, reach more customers in your area, and grow your business for free.</p>
+    </div>
+    <div class="shop-home-features">
+      <div class="shop-home-feat">
+        <div class="shop-feat-icon" style="background:rgba(255,107,53,.12);">📍</div>
+        <div class="shop-feat-text">
+          <h4>Live Location</h4>
+          <p>Auto-detect your shop's location with GPS</p>
+        </div>
+      </div>
+      <div class="shop-home-feat">
+        <div class="shop-feat-icon" style="background:rgba(29,155,94,.12);">✅</div>
+        <div class="shop-feat-text">
+          <h4>Free Listing</h4>
+          <p>Get listed on Wellnexis at zero cost</p>
+        </div>
+      </div>
+      <div class="shop-home-feat">
+        <div class="shop-feat-icon" style="background:rgba(27,79,204,.12);">👥</div>
+        <div class="shop-feat-text">
+          <h4>Reach Customers</h4>
+          <p>Visible to all users in your district</p>
+        </div>
+      </div>
+      <div class="shop-home-feat">
+        <div class="shop-feat-icon" style="background:rgba(11,138,138,.12);">⚡</div>
+        <div class="shop-feat-text">
+          <h4>Quick Setup</h4>
+          <p>Complete registration in under 2 minutes</p>
+        </div>
+      </div>
+    </div>
+    <div class="shop-home-steps-preview">
+      <div class="shop-home-steps-preview-title">Registration Steps</div>
+      <div class="shop-preview-steps">
+        <div class="shop-preview-step">
+          <div class="shop-preview-step-num">1</div>
+          <div class="shop-preview-step-label">Basic Information</div>
+        </div>
+        <div class="shop-preview-line"></div>
+        <div class="shop-preview-step">
+          <div class="shop-preview-step-num">2</div>
+          <div class="shop-preview-step-label">Location</div>
+        </div>
+        <div class="shop-preview-line"></div>
+        <div class="shop-preview-step">
+          <div class="shop-preview-step-num">3</div>
+          <div class="shop-preview-step-label">Review</div>
+        </div>
+      </div>
+    </div>
+    <button class="shop-home-start-btn" onclick="shopStartRegistration()">
+      🚀 Start Registration
+    </button>
+  </div>
+
+  <!-- Progress Steps (hidden until registration starts) -->
+  <div class="shop-steps" id="shopSteps" style="display:none">
+    <div class="shop-step active" id="stepTab1">
+      <div class="step-circle" id="stepCircle1">1</div>
+      <div class="step-label">Basic Info</div>
+    </div>
+    <div class="step-line" id="stepLine1"></div>
+    <div class="shop-step" id="stepTab2">
+      <div class="step-circle" id="stepCircle2">2</div>
+      <div class="step-label">Location</div>
+    </div>
+    <div class="step-line" id="stepLine2"></div>
+    <div class="shop-step" id="stepTab3">
+      <div class="step-circle" id="stepCircle3">3</div>
+      <div class="step-label">Review</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: Basic Information ── -->
+  <div class="shop-step-panel active" id="shopPanel1">
+    <div class="shop-field-row">
+      <div class="shop-field">
+        <label class="shop-label">Shop Name <span class="req">*</span></label>
+        <input class="shop-input" id="sShopName" type="text" placeholder="e.g. Sri Murugan Stores" oninput="clearShopErr(this)"/>
+        <div class="shop-err" id="errShopName">Shop name is required</div>
+      </div>
+      <div class="shop-field">
+        <label class="shop-label">Owner Name <span class="req">*</span></label>
+        <input class="shop-input" id="sOwnerName" type="text" placeholder="e.g. Rajan Kumar" oninput="clearShopErr(this)"/>
+        <div class="shop-err" id="errOwnerName">Owner name is required</div>
+      </div>
+    </div>
+    <div class="shop-field-row">
+      <div class="shop-field">
+        <label class="shop-label">Contact Number 1 <span class="req">*</span></label>
+        <input class="shop-input" id="sPhone1" type="tel" maxlength="10" placeholder="10-digit mobile" oninput="validatePhone(this,'errPhone1')"/>
+        <div class="shop-err" id="errPhone1">Enter valid 10-digit number</div>
+      </div>
+      <div class="shop-field">
+        <label class="shop-label">Contact Number 2</label>
+        <input class="shop-input" id="sPhone2" type="tel" maxlength="10" placeholder="Optional" oninput="validatePhone2(this)"/>
+        <div class="shop-err" id="errPhone2">Enter valid 10-digit number</div>
+      </div>
+    </div>
+    <div class="shop-field">
+      <label class="shop-label">Email Address <span class="req">*</span></label>
+      <div style="display:flex;gap:8px;align-items:flex-start;">
+        <div style="flex:1">
+          <input class="shop-input" id="sEmail" type="email" placeholder="your@email.com" oninput="clearShopErr(this);resetOtpOnEmailChange()"/>
+          <div class="shop-err" id="errEmail">Enter a valid email address</div>
+        </div>
+        <button class="send-otp-btn" id="sendOtpBtn" onclick="sendShopOTP()" type="button">Send OTP</button>
+      </div>
+      <!-- Verified badge -->
+      <div class="otp-verified-badge" id="otpVerifiedBadge">✅ Email Verified</div>
+    </div>
+    <!-- OTP entry row — shown after Send OTP clicked -->
+    <div class="otp-verify-row" id="otpVerifyRow">
+      <div style="flex:1">
+        <div style="font-size:.74rem;font-weight:700;color:var(--text2);margin-bottom:6px;">Enter 6-digit OTP sent to your email</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <input class="otp-digit" id="otp0" maxlength="1" type="text" inputmode="numeric" oninput="otpMove(this,1)" onkeydown="otpBack(event,this,null)"/>
+          <input class="otp-digit" id="otp1" maxlength="1" type="text" inputmode="numeric" oninput="otpMove(this,2)" onkeydown="otpBack(event,this,0)"/>
+          <input class="otp-digit" id="otp2" maxlength="1" type="text" inputmode="numeric" oninput="otpMove(this,3)" onkeydown="otpBack(event,this,1)"/>
+          <input class="otp-digit" id="otp3" maxlength="1" type="text" inputmode="numeric" oninput="otpMove(this,4)" onkeydown="otpBack(event,this,2)"/>
+          <input class="otp-digit" id="otp4" maxlength="1" type="text" inputmode="numeric" oninput="otpMove(this,5)" onkeydown="otpBack(event,this,3)"/>
+          <input class="otp-digit" id="otp5" maxlength="1" type="text" inputmode="numeric" oninput="otpAutoVerify()" onkeydown="otpBack(event,this,4)"/>
+          <button class="verify-btn" onclick="verifyShopOTP()">Verify ✓</button>
+        </div>
+        <div class="otp-timer" id="otpTimer"></div>
+        <div class="shop-err" id="errOtp">Incorrect OTP. Please try again.</div>
+      </div>
+    </div>
+
+    <!-- ── Owner Profile Section ── -->
+    <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border);">
+      <div style="font-size:.72rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;">👤 Owner Profile</div>
+
+      <!-- Profile Photo -->
+      <div class="shop-field" style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+        <div id="ownerPhotoPreview" style="width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0;overflow:hidden;border:2px solid var(--border);">👤</div>
+        <div style="flex:1">
+          <label class="shop-label">Profile Photo <span style="font-size:.68rem;color:var(--text3)">(optional)</span></label>
+          <input type="file" id="sOwnerPhoto" accept="image/*" style="display:none" onchange="previewOwnerPhoto(this)"/>
+          <button type="button" onclick="document.getElementById('sOwnerPhoto').click()" style="display:block;margin-top:5px;padding:7px 14px;border:1.5px dashed var(--border);border-radius:8px;background:transparent;color:var(--text2);font-size:.78rem;cursor:pointer;width:100%;text-align:center;">📷 Upload Photo</button>
+          <div style="font-size:.67rem;color:var(--text3);margin-top:3px;">JPG / PNG — auto compressed &amp; saved</div>
+        </div>
+      </div>
+
+      <div class="shop-field-row">
+        <div class="shop-field">
+          <label class="shop-label">Gender</label>
+          <select class="shop-select" id="sOwnerGender">
+            <option value="">— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="shop-field">
+          <label class="shop-label">Age</label>
+          <input class="shop-input" id="sOwnerAge" type="number" min="18" max="99" placeholder="e.g. 35"/>
+        </div>
+      </div>
+
+      <div class="shop-field">
+        <label class="shop-label">Languages Spoken</label>
+        <input class="shop-input" id="sOwnerLanguages" type="text" placeholder="e.g. Tamil, English, Hindi"/>
+      </div>
+
+      <div class="shop-field">
+        <label class="shop-label">About the Owner <span style="font-size:.68rem;color:var(--text3)">(optional)</span></label>
+        <textarea class="shop-textarea" id="sOwnerAbout" rows="3" placeholder="Brief intro — experience, specialities, years in business…" style="min-height:64px;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: Location ── -->
+  <div class="shop-step-panel" id="shopPanel2">
+
+    <!-- Location instruction card -->
+    <div class="loc-instruction-card">
+      <div class="loc-instruction-icon">🗺️</div>
+      <div class="loc-instruction-text">
+        <strong>Pin Your Exact Shop Location</strong><br>
+        Click <em>Get My Location</em> to auto-detect, then <strong>drag the red pin</strong> to your exact shop spot on the map.
+      </div>
+    </div>
+
+    <button class="loc-btn" id="locBtn" onclick="getShopLocation()">
+      <span id="locBtnIcon">📍</span> Get My Location
+    </button>
+
+    <!-- Interactive Leaflet map (replaces static iframe) -->
+    <div id="shopMap">
+      <div id="shopLeafletMap"></div>
+      <div class="map-drag-hint" id="mapDragHint" style="display:none;">
+        🖐️ Drag the pin to your exact shop location
+      </div>
+    </div>
+
+    <!-- Detected address from reverse geocoding -->
+    <div class="loc-address-box" id="locAddressBox" style="display:none;">
+      <div class="loc-address-label">📌 Detected Address</div>
+      <div class="loc-address-val" id="locAddressVal">Detecting…</div>
+    </div>
+
+    <div class="loc-info" id="locInfo">
+      <div class="loc-kv"><div class="loc-kv-label">Latitude</div><div class="loc-kv-val" id="locLat">—</div></div>
+      <div class="loc-kv"><div class="loc-kv-label">Longitude</div><div class="loc-kv-val" id="locLng">—</div></div>
+    </div>
+    <div class="shop-field-row">
+      <div class="shop-field">
+        <label class="shop-label">State <span class="req">*</span></label>
+        <select class="shop-select" id="sState" onchange="populateDistricts();clearShopErr(this)">
+          <option value="">— Select State —</option>
+          <option>Tamil Nadu</option><option>Maharashtra</option><option>Karnataka</option>
+          <option>Uttar Pradesh</option><option>Rajasthan</option><option>West Bengal</option>
+          <option>Gujarat</option><option>Andhra Pradesh</option><option>Kerala</option>
+          <option>Odisha</option><option>Bihar</option><option>Madhya Pradesh</option>
+          <option>Punjab</option><option>Haryana</option><option>Assam</option>
+          <option>Telangana</option><option>Jharkhand</option><option>Chhattisgarh</option>
+          <option>Uttarakhand</option><option>Himachal Pradesh</option>
+        </select>
+        <div class="shop-err" id="errState">Please select a state</div>
+      </div>
+      <div class="shop-field">
+        <label class="shop-label">District <span class="req">*</span></label>
+        <select class="shop-select" id="sDistrict" onchange="clearShopErr(this)">
+          <option value="">— Select District —</option>
+        </select>
+        <div class="shop-err" id="errDistrict">Please select a district</div>
+      </div>
+    </div>
+    <div class="shop-field">
+      <label class="shop-label">Village / City <span class="req">*</span></label>
+      <input class="shop-input" id="sVillage" type="text" placeholder="e.g. Kovilpatti" oninput="clearShopErr(this)"/>
+      <div class="shop-err" id="errVillage">Village / City is required</div>
+    </div>
+    <div class="shop-field">
+      <label class="shop-label">Full Address <span class="req">*</span></label>
+      <textarea class="shop-textarea" id="sAddress" placeholder="Door No, Street, Landmark…" oninput="clearShopErr(this)"></textarea>
+      <div class="shop-err" id="errAddress">Address is required</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: Review ── -->
+  <div class="shop-step-panel" id="shopPanel3">
+    <div class="review-section">
+      <div class="review-section-title">🏪 Shop Details</div>
+      <div class="review-grid">
+        <div class="review-kv"><div class="review-kv-label">Shop Name</div><div class="review-kv-val" id="rev_shopName">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Owner Name</div><div class="review-kv-val" id="rev_ownerName">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Contact 1</div><div class="review-kv-val" id="rev_phone1">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Contact 2</div><div class="review-kv-val" id="rev_phone2">—</div></div>
+      </div>
+      <div class="review-kv" style="margin-top:8px"><div class="review-kv-label">Email</div><div class="review-kv-val" id="rev_email">—</div></div>
+    </div>
+    <div class="review-section">
+      <div class="review-section-title">👤 Owner Profile</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+        <div id="rev_ownerPhotoWrap" style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--teal));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;overflow:hidden;border:2px solid var(--border);">👤</div>
+        <div>
+          <div style="font-size:.82rem;font-weight:700;color:var(--text)" id="rev_ownerNameBig">—</div>
+          <div style="font-size:.74rem;color:var(--text3)" id="rev_ownerMeta">—</div>
+        </div>
+      </div>
+      <div class="review-grid">
+        <div class="review-kv"><div class="review-kv-label">Gender</div><div class="review-kv-val" id="rev_ownerGender">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Age</div><div class="review-kv-val" id="rev_ownerAge">—</div></div>
+        <div class="review-kv" style="grid-column:1/-1"><div class="review-kv-label">Languages</div><div class="review-kv-val" id="rev_ownerLanguages">—</div></div>
+      </div>
+      <div class="review-kv" style="margin-top:8px"><div class="review-kv-label">About</div><div class="review-kv-val" id="rev_ownerAbout" style="white-space:pre-wrap;">—</div></div>
+    </div>
+    <div class="review-section">
+      <div class="review-section-title">📍 Location Details</div>
+      <div class="review-grid">
+        <div class="review-kv"><div class="review-kv-label">State</div><div class="review-kv-val" id="rev_state">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">District</div><div class="review-kv-val" id="rev_district">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Village / City</div><div class="review-kv-val" id="rev_village">—</div></div>
+        <div class="review-kv"><div class="review-kv-label">Coordinates</div><div class="review-kv-val" id="rev_coords">—</div></div>
+      </div>
+      <div class="review-kv" style="margin-top:8px"><div class="review-kv-label">Full Address</div><div class="review-kv-val" id="rev_address">—</div></div>
+      <div class="review-map" id="revMap" style="display:none"><div id="revLeafletMap" style="width:100%;height:100%;border-radius:8px;"></div></div>
+    </div>
+  </div>
+
+  <!-- ── Success Screen ── -->
+  <div class="shop-success" id="shopSuccess">
+    <div class="success-ring">🛍️</div>
+    <h3>Shop Registered!</h3>
+    <p>Your shop has been successfully registered and is now listed on Wellnexis.</p>
+    <div class="shop-id-badge" id="shopIdBadge">SHOP-000000</div><br/>
+    <button class="shop-btn-next" onclick="closeShopModal()" style="margin:0 auto;">✓ Done</button>
+  </div>
+
+  <!-- ── Bottom Nav ── -->
+  <div class="shop-nav-row" id="shopNavRow" style="display:none">
+    <button class="shop-btn-back" id="shopBtnBack" onclick="shopStepBack()" style="visibility:hidden">← Back</button>
+    <button class="shop-btn-next" id="shopBtnNext" onclick="shopStepNext()">Next →</button>
+  </div>
+
+</div><!-- end .shop-modal -->
+</div><!-- end .shop-overlay -->

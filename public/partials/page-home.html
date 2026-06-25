@@ -1,0 +1,47 @@
+<!-- ── HOME ── -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-flag" data-i18n="hero_badge">🇮🇳 AI-Powered · 73+ Active Schemes · Free Forever</div>
+    <h1 data-i18n="hero_h1">Find Government Schemes<br/><em>Made for You</em></h1>
+    <p data-i18n="hero_sub">Tell us about yourself once — our AI recommends the right schemes, checks your eligibility, and guides you step by step in applying.</p>
+    <div class="hero-search">
+      <div class="hero-search-input-wrap">
+        <input type="text" id="searchInput" placeholder="Search schemes, benefits, documents…" data-i18n-placeholder="search_ph" oninput="filterSchemes(this.value)" onkeydown="if(event.key==='Enter')filterSchemes(this.value)"/>
+        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice Search">🎤</button>
+      </div>
+      <button class="search-btn" onclick="filterSchemes(document.getElementById('searchInput').value)"><span data-i18n="btn_search">🔍 Search</span></button>
+    </div>
+  </div>
+
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-num" id="stat1">0</div><div class="stat-label" data-i18n="stat_schemes">Total Schemes</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat3">0</div><div class="stat-label" data-i18n="stat_states">States Covered</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat4">0%</div><div class="stat-label" data-i18n="stat_success">Success Rate</div></div>
+  </div>
+
+  <div class="section-header">
+    <p class="section-title"><span class="st-icon">📂</span> <span data-i18n="cat_browse">Browse by Category</span></p>
+  </div>
+  <div class="chip-row" id="chipRow">
+    <div class="chip active" onclick="filterCat('All',this)"><span data-i18n="chip_all">🔮 All</span></div>
+    <div class="chip" onclick="filterCat('Agriculture',this)"><span data-i18n="chip_agri">🌾 Agriculture</span></div>
+    <div class="chip" onclick="filterCat('Education',this)"><span data-i18n="chip_edu">📚 Education</span></div>
+    <div class="chip" onclick="filterCat('Health',this)"><span data-i18n="chip_health">🏥 Health</span></div>
+    <div class="chip" onclick="filterCat('Housing',this)"><span data-i18n="chip_housing">🏠 Housing</span></div>
+    <div class="chip" onclick="filterCat('Women',this)"><span data-i18n="chip_women">👩 Women</span></div>
+    <div class="chip" onclick="filterCat('Business',this)"><span data-i18n="chip_biz">💼 Business</span></div>
+    <div class="chip" onclick="filterCat('Labour',this)"><span data-i18n="chip_labour">🔧 Labour</span></div>
+    <div class="chip" onclick="filterCat('Pension',this)"><span data-i18n="chip_pension">🧓 Pension</span></div>
+    <div class="chip" onclick="filterCat('Social',this)"><span data-i18n="chip_social">🤝 Social</span></div>
+    <div class="chip" onclick="filterCat('Financial',this)"><span data-i18n="chip_financial">💰 Financial</span></div>
+    <div class="chip" onclick="filterCat('Infrastructure',this)"><span data-i18n="chip_infra">⚡ Infrastructure</span></div>
+    <div class="chip" onclick="filterCat('Science',this)"><span data-i18n="chip_science">🔬 Science</span></div>
+  </div>
+
+  <div class="section-header">
+    <p class="section-title"><span class="st-icon">✨</span> <span data-i18n="cat_recommended">Recommended for You</span></p>
+    <button class="see-all" onclick="navigate('schemes')"><span data-i18n="btn_seeall">See all →</span></button>
+  </div>
+  <div class="schemes-grid" id="schemesGrid"></div>
+</div>

@@ -1,0 +1,134 @@
+<!-- ── ELIGIBILITY CHECKER ── -->
+<div class="page" id="page-check">
+  <div class="checker-wrap">
+    <div style="text-align:center;margin-bottom:24px">
+      <p class="section-title" style="justify-content:center"><span class="st-icon">✅</span> <span data-i18n="elig_title">Eligibility Checker</span></p>
+      <p style="color:var(--text3);font-size:.85rem"><span data-i18n="elig_sub">Fill your profile once — we'll match you with all eligible schemes instantly</span></p>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label"><span data-i18n="form_name">Full Name</span></label><input class="form-input" type="text" id="fname" placeholder="e.g. Rajan Kumar" data-i18n-placeholder="form_name_ph" value=""/></div>
+        <div class="form-group"><label class="form-label"><span data-i18n="form_gender">Gender</span></label><select class="form-select" id="fgender"><option value="Female"><span data-i18n="opt_female">Female</span></option><option value="Male"><span data-i18n="opt_male">Male</span></option><option value="Transgender"><span data-i18n="opt_trans">Transgender</span></option></select></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><span data-i18n="form_age">Age</span>: <span id="ageLabel">18</span> <span data-i18n="form_years">years</span></label>
+        <div class="range-wrap">
+          <input type="range" min="1" max="120" value="18" id="ageRange" oninput="document.getElementById('ageLabel').textContent=this.value;document.getElementById('ageValDisp').textContent=this.value"/>
+          <span class="range-val" id="ageValDisp">18</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label"><span data-i18n="form_income">Annual Income (₹)</span></label>
+          <select class="form-select" id="fincome">
+            <option value="1"><span data-i18n="opt_inc1">Below ₹1 Lakh</span></option>
+            <option value="2"><span data-i18n="opt_inc2">₹1–2 Lakh</span></option>
+            <option value="5"><span data-i18n="opt_inc3">₹2–5 Lakh</span></option>
+            <option value="10"><span data-i18n="opt_inc4">₹5–10 Lakh</span></option>
+            <option value="99"><span data-i18n="opt_inc5">Above ₹10 Lakh</span></option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label"><span data-i18n="form_state">State</span></label>
+          <select class="form-select" id="fstate">
+            <option value="">— Select State —</option>
+            <option>Tamil Nadu</option><option>Maharashtra</option><option>Karnataka</option><option>Uttar Pradesh</option><option>Rajasthan</option><option>West Bengal</option><option>Gujarat</option><option>Andhra Pradesh</option><option>Kerala</option><option>Odisha</option><option>Bihar</option><option>Madhya Pradesh</option><option>Punjab</option><option>Haryana</option><option>Assam</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label"><span data-i18n="form_caste">Caste Category</span></label>
+          <select class="form-select" id="fcaste"><option>General</option><option>OBC</option><option>SC</option><option>ST</option></select>
+        </div>
+        <div class="form-group"><label class="form-label"><span data-i18n="form_occu">Occupation</span></label>
+          <select class="form-select" id="foccu"><option>Farmer</option><option>Student</option><option>Self-employed</option><option>Daily Wage Worker</option><option>Government Employee</option><option>Unemployed</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label"><span data-i18n="form_land">Land Holding</span></label>
+          <select class="form-select" id="fland"><option><span data-i18n="opt_land0">No Land</span></option><option><span data-i18n="opt_land1">Below 2 Acres</span></option><option><span data-i18n="opt_land2">2–5 Acres</span></option><option><span data-i18n="opt_land3">Above 5 Acres</span></option></select>
+        </div>
+        <div class="form-group"><label class="form-label"><span data-i18n="form_special">Special Status</span></label>
+          <select class="form-select" id="fdis"><option><span data-i18n="opt_sp0">None</span></option><option><span data-i18n="opt_sp1">Physically Disabled</span></option><option><span data-i18n="opt_sp2">Visually Impaired</span></option><option><span data-i18n="opt_sp3">Pregnant / Lactating</span></option><option><span data-i18n="opt_sp4">Widow</span></option><option><span data-i18n="opt_sp5">Senior Citizen (60+)</span></option></select>
+        </div>
+      </div>
+      <button class="check-btn" onclick="runEligibility()"><span data-i18n="btn_check">🔍 Check My Eligibility Now</span></button>
+
+      <!-- ── Optional: Register a Shop ── -->
+      <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border)">
+        <label class="toggle-row" id="shopToggleRow" onclick="toggleShopSection()">
+          <div class="toggle-label">
+            <span class="toggle-label-icon">🛍️</span>
+            <div class="toggle-label-text">
+              <strong>Register Your Shop (Optional)</strong>
+              <span>List your shop on Wellnexis — reach more customers for free</span>
+            </div>
+          </div>
+          <label class="toggle-switch" onclick="event.stopPropagation()">
+            <input type="checkbox" id="shopToggleInput" onchange="toggleShopSection()"/>
+            <span class="toggle-slider"></span>
+          </label>
+        </label>
+
+        <!-- Collapsible shop fields -->
+        <div class="optional-shop-section" id="optionalShopSection">
+          <div class="optional-shop-divider"><span>🛍️ Shop Information</span></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Shop Name <span style="color:var(--secondary)">*</span></label>
+              <input class="form-input" id="optShopName" type="text" placeholder="e.g. Sri Murugan Stores"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Owner Name <span style="color:var(--secondary)">*</span></label>
+              <input class="form-input" id="optOwnerName" type="text" placeholder="Owner's full name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Category <span style="color:var(--secondary)">*</span></label>
+              <select class="form-select" id="optShopType">
+                <option value="General Shop">🛍️ General Shop</option>
+                <option value="CSC Center">🏛️ CSC Center</option>
+                <option value="Government Service">🏢 Government Service</option>
+                <option value="Medical">💊 Medical / Pharmacy</option>
+                <option value="Education">📚 Education</option>
+                <option value="Agriculture">🌾 Agriculture</option>
+                <option value="Finance">💰 Finance / Banking</option>
+                <option value="Other">📦 Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Number <span style="color:var(--secondary)">*</span></label>
+              <input class="form-input" id="optShopPhone" type="tel" maxlength="10" placeholder="10-digit mobile"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">District <span style="color:var(--secondary)">*</span></label>
+              <input class="form-input" id="optShopDistrict" type="text" placeholder="e.g. Coimbatore"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Village / City <span style="color:var(--secondary)">*</span></label>
+              <input class="form-input" id="optShopVillage" type="text" placeholder="e.g. Gandhipuram"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Full Address</label>
+            <input class="form-input" id="optShopAddress" type="text" placeholder="Street, landmark…"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-input" id="optShopDesc" rows="2"
+              style="resize:vertical"
+              placeholder="Brief description of products / services offered…"></textarea>
+          </div>
+          <button class="check-btn" style="background:linear-gradient(135deg,#FF6B35,#F7931E);margin-top:4px"
+                  onclick="submitOptionalShop()">
+            🛍️ Register Shop Now
+          </button>
+          <div id="optShopMsg" style="display:none;margin-top:10px;padding:12px 16px;border-radius:8px;font-size:.82rem;font-weight:600;"></div>
+        </div>
+      </div>
+
+    </div>
+    <div id="resultPanel" style="display:none"></div>
+  </div>
+</div>
