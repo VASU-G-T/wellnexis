@@ -338,7 +338,7 @@ function applyTranslations(lang) {
 
 // Track current filter states for re-render on lang switch
 let currentCat = 'All';
-let currentCat2 = 'All';
+
 let currentDocType = 'All';
 
 
