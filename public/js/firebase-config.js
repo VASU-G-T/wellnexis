@@ -9,9 +9,9 @@
 ══════════════════════════════════════════════════════════════ */
 const FIREBASE_CONFIG = {
   apiKey:            "AIzaSyCvVRn66W9Piusu-Hp9IHZtGizyd0bVcHI",
-  authDomain:        "wellnexis-pro-ac794.firebaseapp.com",
-  projectId:         "wellnexis-pro-ac794",
-  storageBucket:     "wellnexis-pro-ac794.firebasestorage.app",
+  authDomain:        "wellnexisai.firebaseapp.com",
+  projectId:         "wellnexisai",
+  storageBucket:     "wellnexisai.firebasestorage.app",
   messagingSenderId: "350214575273",
   appId:             "1:350214575273:web:606e169806c1b5a5d085b8"
 };
