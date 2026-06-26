@@ -3,7 +3,7 @@
 ═══════════════════════════════════════════════ */
 const SCHEMES=[
 /* AGRICULTURE */
-{id:1,name:"PM Kisan Samman Nidhi",icon:"🌾",iconBg:"rgba(29,155,94,.12)",cat:"Agriculture",desc:"₹6,000/year direct income support for small & marginal farmers in 3 installments of ₹2,000 each directly to bank accounts.",tags:["Farmer","₹6000/yr","Central","DBT"],eligibleFor:["Farmer"],incomeMax:99,deadline:"Open (Ongoing)",daysLeft:null,eligible:"yes",website:"https://pmkisan.gov.in",
+{id:1,name:"PM Kisan Samman Nidhi",youtube:"https://youtu.be/I0mRbxv-0GE",icon:"🌾",iconBg:"rgba(29,155,94,.12)",cat:"Agriculture",desc:"₹6,000/year direct income support for small & marginal farmers in 3 installments of ₹2,000 each directly to bank accounts.",tags:["Farmer","₹6000/yr","Central","DBT"],eligibleFor:["Farmer"],incomeMax:99,deadline:"Open (Ongoing)",daysLeft:null,eligible:"yes",website:"https://pmkisan.gov.in",
   fullDetails:{
     ministry:"Ministry of Agriculture & Farmers Welfare",
     launched:"February 2019",
@@ -2217,3 +2217,4 @@ const SCHEMES=[
   fullDetails:{ministry:"Ministry of Health & Family Welfare",launched:"2013",benefit:"Free screening for children 0–18 years; Free corrective surgery for 30 conditions at empanelled hospitals",eligibility:["All children 0–18 years in government schools and AWCs","No income limit"],documents:["No documents needed; Screening done at school or AWC"],applyProcess:["Mobile health team visits school/AWC on scheduled date","Every child screened on 4Ds","Referral to District Early Intervention Centre (DEIC)","Free surgery at empanelled tertiary hospital"]}},
 
 ];
+
