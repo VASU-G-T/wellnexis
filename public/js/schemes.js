@@ -190,7 +190,7 @@ function showSchemeDetail(id){
           <div class="kv-item"><div class="kv-label">${t('det_cat')||'Category'}</div><div class="kv-val">${s.cat}</div></div>
           <div class="kv-item"><div class="kv-label">${t('det_deadline')||'Deadline'}</div><div class="kv-val">${s.deadline}</div></div>
         </div>
-        ${s.youtube ? `<div class="detail-section"><h4>?? Video Tutorial</h4><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000"><iframe src="https://www.youtube.com/embed/${s.youtube.includes('youtu.be/') ? s.youtube.split('youtu.be/')[1].split('?')[0] : s.youtube.includes('v=') ? s.youtube.split('v=')[1].split('&')[0] : s.youtube}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy"></iframe></div></div>` : ""}<div class="detail-action-row">
+        ${s.youtube ? `<div class="detail-section"><h4>?? Video Tutorial</h4><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;background:#000"><iframe src="https://www.youtube.com/embed/${s.youtube.includes('youtu.be/') ? s.youtube.split('youtu.be/')[1].split('?')[0] : s.youtube.includes('v=') ? s.youtube.split('v=')[1].split('&')[0] : s.youtube}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy"></iframe></div></div>` : ""}${s.youtube?`<div class="detail-section"><h4>?? Video Tutorial</h4><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px"><iframe src="https://www.youtube.com/embed/${typeof s.youtube==='object'?(s.youtube[currentLang]||s.youtube.en):s.youtube}" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0" allowfullscreen loading="lazy"></iframe></div></div>`:``}<div class="detail-action-row">
           ${s.pdfUrl
             ? `<a class="btn-primary" href="${s.pdfUrl}" target="_blank" rel="noopener" style="text-decoration:none">📥 Download Official PDF Form</a>`
             : `<button class="btn-primary" onclick="downloadSchemeForm('${s.name.replace(/'/g,"\\'")}')">📥 Download Application Form</button>`
@@ -273,4 +273,5 @@ function downloadSchemeForm(name){
     showToast(t('toast_gen_ok'));
   },1000);
 }
+
 

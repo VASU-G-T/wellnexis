@@ -68,3 +68,4 @@ let sdAdminFilter   = 'all';    // Admin panel filter
 // Load favorites from localStorage
 try { sdUserFavorites = JSON.parse(localStorage.getItem('wd_favorites')||'[]'); } catch(e){}
 
+
